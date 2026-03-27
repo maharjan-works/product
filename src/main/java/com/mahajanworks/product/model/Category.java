@@ -12,6 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "category_tbl")
 public class Category {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

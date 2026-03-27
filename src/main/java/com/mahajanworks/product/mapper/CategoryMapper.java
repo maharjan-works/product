@@ -3,6 +3,8 @@ package com.mahajanworks.product.mapper;
 import com.mahajanworks.product.dto.CategoryDTO;
 import com.mahajanworks.product.model.Category;
 
+import java.util.ArrayList;
+
 public class CategoryMapper {
 
     public static Category toCategory(CategoryDTO categoryDTO){
@@ -15,7 +17,8 @@ public class CategoryMapper {
         return CategoryDTO.builder()
                 .id(category.getId())
                 .name(category.getName())
-                .products(category.getProducts().stream().map(ProductMapper::toProductDTO).toList())
+                .products((category.getProducts() == null) ?
+                        new ArrayList<>() : category.getProducts().stream().map(ProductMapper::toProductDTO).toList())
                 .build();
     }
 }

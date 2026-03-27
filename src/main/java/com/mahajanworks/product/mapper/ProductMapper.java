@@ -19,7 +19,7 @@ public class ProductMapper {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
-                .category(product.getCategory())
+                .categoryId(product.getCategory().getId())
                 .build();
     }
 }
