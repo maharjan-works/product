@@ -23,4 +23,17 @@ public class ProductException {
                         .build()
                 );
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionResponse> handleCategoryNotFoundException(CategoryNotFoundException ex, WebRequest webRequest) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ExceptionResponse.builder()
+                        .apiPath(webRequest.getDescription(false))
+                        .statusCode(HttpStatus.NOT_FOUND)
+                        .message(ex.getMessage())
+                        .timestamp(LocalDateTime.now())
+                        .build()
+                );
+    }
 }
