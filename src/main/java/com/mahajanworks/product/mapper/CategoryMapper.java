@@ -7,18 +7,19 @@ import java.util.ArrayList;
 
 public class CategoryMapper {
 
-    public static Category toCategory(CategoryDTO categoryDTO){
+    public static Category toCategory(CategoryDTO categoryDTO) {
         return Category.builder()
                 .name(categoryDTO.getName())
                 .build();
     }
 
-    public static CategoryDTO toCategoryDTO(Category category){
+    public static CategoryDTO toCategoryDTO(Category category) {
         return CategoryDTO.builder()
                 .id(category.getId())
                 .name(category.getName())
                 .products((category.getProducts() == null) ?
-                        new ArrayList<>() : category.getProducts().stream().map(ProductMapper::toProductDTO).toList())
+                        new ArrayList<>() :
+                        category.getProducts().stream().map(ProductMapper::toProductDTO).toList())
                 .build();
     }
 }
