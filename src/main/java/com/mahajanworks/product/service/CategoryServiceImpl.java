@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +36,14 @@ public class CategoryServiceImpl implements CategoryService {
             log.info("Category: {} already exists in db, and throws related exception", categoryDTO.getName());
             throw new CategoryAlreadyExistsException("Category " + categoryDTO.getName() + " already exists in db");
         }
+    }
+
+    @Override
+    public List<CategoryDTO> getCategories() {
+        log.info("fetching all categories from db");
+        List<Category> categories = categoryRepository.findAll();
+        log.info("fetched all categories from db, converted to dto and return");
+        return categories.stream().map(CategoryMapper::toCategoryDTO).toList();
     }
 
 
