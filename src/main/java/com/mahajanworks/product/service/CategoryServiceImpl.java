@@ -81,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
         log.info("saving updated Category: {} into db", category);
         category = categoryRepository.save(category);
 
-        log.info("returning updated new categey: {}", category);
+        log.info("returning updated new category: {}", category);
         return CategoryMapper.toCategoryDTO(category);
     }
 
@@ -102,6 +102,4 @@ public class CategoryServiceImpl implements CategoryService {
         log.info("returning message after deletion");
         return Map.of("message", "Category: "+ category + " deleted successfully");
     }
-
-
 }

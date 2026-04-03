@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService{
@@ -33,13 +35,19 @@ public class ProductServiceImpl implements ProductService{
 
         Product product = ProductMapper.toProduct(productDTO,category);
 
-
         product = productRepository.save(product);
 
         System.out.println("saved product: "+product);
         log.info("product saved into db and returned category");
         return ProductMapper.toProductDTO(product);
     }
+
+    @Override
+    public List<ProductDTO> getProducts() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(ProductMapper::toProductDTO).toList();
+    }
+
 
 
 }

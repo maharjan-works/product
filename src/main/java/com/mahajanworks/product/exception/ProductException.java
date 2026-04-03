@@ -36,4 +36,28 @@ public class ProductException {
                         .build()
                 );
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionResponse> handleInternalServerException(InternalServerException ex, WebRequest webRequest){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ExceptionResponse.builder()
+                        .apiPath(webRequest.getDescription(false))
+                        .statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .message(ex.getMessage())
+                        .timestamp(LocalDateTime.now())
+                        .build()
+                );
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionResponse> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest webRequest){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ExceptionResponse.builder()
+                        .apiPath(webRequest.getDescription(false))
+                        .statusCode(HttpStatus.NOT_FOUND)
+                        .message(ex.getMessage())
+                        .timestamp(LocalDateTime.now())
+                        .build());
+
+    }
 }

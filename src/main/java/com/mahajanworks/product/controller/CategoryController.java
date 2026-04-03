@@ -25,7 +25,6 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-
     @Operation(
             summary = "add a category"
     )
@@ -35,7 +34,8 @@ public class CategoryController {
     })
     @PostMapping
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO){
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.createCategory(categoryDTO));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(categoryService.createCategory(categoryDTO));
     }
 
     @Operation(

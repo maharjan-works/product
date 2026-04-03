@@ -9,10 +9,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(
         name = "Product Endpoints",
@@ -33,5 +32,14 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO){
         return  ResponseEntity.status(HttpStatus.CREATED).body(productService.addProduct(productDTO));
+    }
+
+    @Operation(summary = "get all products")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",description = "OK")
+    })
+    @GetMapping
+    public ResponseEntity<List<ProductDTO>> getProducts(){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getProducts());
     }
 }
